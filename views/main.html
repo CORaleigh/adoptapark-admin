@@ -1,0 +1,79 @@
+<div style="margin: 1em 0 1em 0">
+  <input class="form-control" ng-change="searchChanged()" ng-model="search" placeholder="Enter park name to filter" style="margin: 1em 0 1em 0"></input>
+  <a href="javascript:void(0)" ng-click="exportList($event)" ng-if="canExport">Export</a>
+</div>
+<div ng-repeat="park in parks" ng-model="park">
+<div class="well">
+  <span class="lead">{{park.name}}</span>
+  <div class="pull-right">
+  <div class="checkbox pull-left" style="margin-right: 1em;">
+    <label>
+      <input type="checkbox" ng-change="parkFullToggled(park)" ng-model="park.parkfull" ng-checked="park.parkfull"> Full?
+    </label>
+  </div>
+    <button class="btn btn-success pull-right" ng-click="addAdopter(park.id)">Add</button>
+
+  </div>
+  <table class="table" ng-show="park.adopters.length > 0">
+    <thead>
+      <tr><th>Organization</th><th>Contact</th><th>Email</th><th>Phone</th><th>Start</th><th>Expires</th></tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="adopter in park.adopters | orderBy: 'id'" ng-form="form">
+          <td class="form-group"  ng-class="{'has-error': form.display.$invalid}">
+            <input name="display" class="form-control" ng-class="{}" ng-model="adopter.display" required ng-maxlength="100" placeholder="Organization name"/>
+             <span id="helpBlock" class="help-block" ng-if="form.display.$error.required">Required</span>
+             <span id="helpBlock" class="help-block" ng-if="form.display.$error.maxlength">Max of 100 characters</span>
+
+          </td>
+          <td class="form-group"  ng-class="{'has-error': form.contact.$invalid}">
+            <input name="contact" class="form-control" ng-model="adopter.contact" required ng-maxlength="50" placeholder="Contact name"/>
+             <span id="helpBlock" class="help-block" ng-if="form.contact.$error.required">Required</span>
+             <span id="helpBlock" class="help-block" ng-if="form.contact.$error.maxlength">Max of 50 characters</span>             
+          </td>
+          <td class="form-group"  ng-class="{'has-error': form.email.$invalid}">
+            <input name="email" class="form-control" ng-model="adopter.email" type="email" required ng-maxlength="50" placeholder="Email address"/>
+             <span id="helpBlock" class="help-block" ng-if="form.email.$error.required">Required</span>
+             <span id="helpBlock" class="help-block" ng-if="form.email.$error.maxlength">Max of 50 characters</span>
+             <span id="helpBlock" class="help-block" ng-if="form.email.$error.email">Invalid email</span>
+
+          </td>
+          <td class="form-group"  ng-class="{'has-error': form.phone.$invalid}">
+            <input name="phone" class="form-control" ng-model="adopter.phone" required ng-maxlength="14" ng-pattern="phoneNumberPattern" placeholder="919-999-9999"/>
+             <span id="helpBlock" class="help-block" ng-if="form.phone.$error.required">Required</span>
+             <span id="helpBlock" class="help-block" ng-if="form.phone.$error.maxlength">Max of 14 characters</span>  
+             <span id="helpBlock" class="help-block" ng-if="form.phone.$error.pattern">Invalid phone #</span>           
+          </td>
+          <td class="form-group"  ng-class="{'has-error': form.start.$invalid}">
+              <input type="text" name="start" type="text" class="form-control datepicker" ng-model="adopter.start" required ng-maxlength="10" placeholder="yyyy-mm-dd"/>
+              <script type="text/javascript">
+                  $(function () {
+                      $('.datepicker').datepicker({format:'yyyy-mm-dd'});
+                  });
+              </script>            
+             <span id="helpBlock" class="help-block" ng-if="form.expires.$error.required">Required</span>
+             <span id="helpBlock" class="help-block" ng-if="form.expires.$error.maxlength">Max of 10 characters</span>
+          </td>           
+          <td class="form-group"  ng-class="{'has-error': form.expires.$invalid}">
+              <input type="text" name="expires" type="text" class="form-control datepicker" ng-model="adopter.expires" required ng-maxlength="10" placeholder="yyyy-mm-dd"/>
+              <script type="text/javascript">
+                  $(function () {
+                      $('.datepicker').datepicker();
+                  });
+              </script>            
+             <span id="helpBlock" class="help-block" ng-if="form.expires.$error.required">Required</span>
+             <span id="helpBlock" class="help-block" ng-if="form.expires.$error.maxlength">Max of 10 characters</span>
+          </td>           
+          <td class="pull-right">
+            <button ng-disabled="form.$invalid" ng-if="adopter.id" class="btn btn-success" ng-click="updateAdopter(adopter, park.id, 'update')">Update</button>
+            <button ng-disabled="form.$invalid" ng-if="!adopter.id" class="btn btn-success" ng-click="updateAdopter(adopter, park.id, 'add')">Add</button>
+          </td>
+          <td class="form-group">
+            <button class="btn btn-danger" ng-click="deleteAdopter(adopter.id, park.id, $index)">Delete</button>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+

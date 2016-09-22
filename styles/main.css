@@ -1,0 +1,82 @@
+html, body {
+  height:100%;
+  padding: 0;
+  margin: 0;
+  background-color: #f8f8f8;
+}
+
+
+/* Customize container */
+@media (min-width: 768px) {
+
+}
+
+
+
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+
+}
+
+
+
+.navbar {
+  max-height: 50px;
+}
+
+.navbar, .jumbotron {
+  margin-bottom: 0px !important;
+  width: 100%;
+}
+
+.navbar .container {
+  width: 100%;
+}
+
+
+.jumbotron {
+  background-color: #5da245 !important;
+  color: white !important;
+  padding-top: 10px !important;
+  padding-bottom: 0px;
+  height: 120px;
+  background: #E6423F;
+  background-color: #e23d39;
+  background-image: -webkit-linear-gradient(#5da245,#67a84a);
+  background-image: linear-gradient(to bottom,#5da245,#67a84a);
+}
+.header {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background-position: 30% 50%;
+  background: url(../images/Skyline1.png) bottom no-repeat;
+
+}
+
+.header img {
+  max-height: 80px;
+  -webkit-filter: drop-shadow(1px 1px 5px #333);
+  filter: drop-shadow(1px 1px 5px #333);
+}
+.jumbotron h2 {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.jumbotron span {
+  font-size: 10pt;
+  max-width: 100px;
+}
+
+.jumbotron {
+  line-height: 20px;
+}
+
+th {
+  border: 0 !important;
+}
+td {
+  border: 0 !important;
+}

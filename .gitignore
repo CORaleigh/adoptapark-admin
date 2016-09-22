@@ -1,1 +1,8 @@
-components
+logs/*
+node_modules/
+components/
+app/jspm_packages
+tmp
+.DS_Store
+.idea
+!.gitkeep
